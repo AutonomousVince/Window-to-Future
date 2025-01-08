@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=Binary-VAI.html">
-    <title>Redirecting...</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VinceAI</title>
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: green;
+      text-align: center;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #response {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-    <p>If you are not redirected automatically, <a href="Binary-VAI.html">click here</a>.</p>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="refresh" content="0; URL='./Binary-VAI.html'" />
-</head>
-<body>
+  <h1>Welcome to VinceAI</h1>
+  <p>Type a question to begin:</p>
+  <input type="text" id="question" placeholder="Ask VinceAI a question...">
+  <button onclick="askVinceAI()">Submit</button>
+  <div id="response"></div>
 </body>
 </html>
 
