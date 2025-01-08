@@ -32,33 +32,39 @@
 </head>
 <body>
     <div id="console">
-        Welcome to **Binary VAI**.<br>
-        Explore Vince AI.<br>
-        Type "help" to begin.<br>
+        Welcome to VinceAI.<br>
+        Type a question to begin.<br>
     </div>
     <input type="text" id="command" placeholder="Type a command..." autofocus>
     <script>
         const consoleDiv = document.getElementById('console');
         const commandInput = document.getElementById('command');
 
-        const commands = {
-            help: 'Available commands: about, roadmap, vision, quit',
-            about: 'Binary VAI showcases Vince AI, a learning AI powered by Turbo AI.',
-            roadmap: 'Phase 1: Learning. Phase 2: Creativity (AI Art & Music). Phase 3: AI Cinema.',
-            vision: 'A future where AI adapts, learns, and grows alongside humanity.',
-            quit: 'Thank you for visiting. Goodbye!'
-        };
-
-        commandInput.addEventListener('keydown', function(e) {
+        commandInput.addEventListener('keydown', async (e) => {
             if (e.key === 'Enter') {
-                const userCommand = commandInput.value.trim();
+                const question = commandInput.value.trim();
                 commandInput.value = '';
-                if (commands[userCommand]) {
-                    consoleDiv.innerHTML += `> ${userCommand}<br>${commands[userCommand]}<br>`;
-                } else {
-                    consoleDiv.innerHTML += `> ${userCommand}<br>Unknown command. Type "help" for a list of commands.<br>`;
+                if (!question) {
+                    return;
                 }
-                consoleDiv.scrollTop = consoleDiv.scrollHeight; // Scroll to the bottom
+
+                consoleDiv.innerHTML += `> ${question}<br>`;
+                consoleDiv.scrollTop = consoleDiv.scrollHeight;
+
+                try {
+                    const response = await fetch('http://localhost:3000/ask', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question }),
+                    });
+
+                    const data = await response.json();
+                    consoleDiv.innerHTML += `${data.answer}<br>`;
+                } catch (error) {
+                    consoleDiv.innerHTML += `Error: Unable to connect to the server.<br>`;
+                }
+
+                consoleDiv.scrollTop = consoleDiv.scrollHeight;
             }
         });
     </script>
