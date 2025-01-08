@@ -3,53 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VinceAI</title>
+  <title>Binary VAI</title>
   <style>
     body {
       background-color: black;
       color: green;
-      font-family: 'Courier New', Courier, monospace;
-      text-align: center;
-      margin: 0;
-      padding: 0;
+      font-family: "Courier New", Courier, monospace;
     }
-    .container {
-      margin-top: 10%;
+    #terminal {
+      border: 2px solid green;
+      width: 80%;
+      height: 80%;
+      margin: 50px auto;
+      padding: 10px;
+    }
+    #terminal p {
+      margin: 5px;
     }
     input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid green;
-      border-radius: 5px;
+      width: 70%;
       background-color: black;
       color: green;
+      border: 1px solid green;
+      padding: 5px;
+      margin-top: 10px;
     }
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: 1px solid green;
-      border-radius: 5px;
       background-color: black;
       color: green;
+      border: 1px solid green;
+      padding: 5px 10px;
       cursor: pointer;
     }
     button:hover {
       background-color: green;
       color: black;
     }
-    .response {
-      margin-top: 20px;
-      font-size: 18px;
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to VinceAI</h1>
-    <p>Type a question to begin:</p>
-    <input type="text" id="question" placeholder="Type your question here">
-    <button onclick="askVinceAI()">Submit</button>
-    <div id="response" class="response"></div>
+  <div id="terminal">
+    <p>Welcome to VinceAI.</p>
+    <p>Type a question to begin.</p>
+    <div>
+      <input id="question" type="text" placeholder="Type your question here...">
+      <button onclick="askVinceAI()">Submit</button>
+    </div>
+    <div id="response">
+      <!-- AI responses will show here -->
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
