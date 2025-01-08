@@ -1,73 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary VAI</title>
-    <style>
-        body {
-            background: black;
-            color: lime;
-            font-family: monospace;
-            margin: 0;
-            padding: 20px;
-        }
-        #console {
-            white-space: pre-wrap;
-            height: 90vh;
-            overflow-y: auto;
-            border: 1px solid lime;
-            padding: 10px;
-        }
-        input {
-            width: 100%;
-            border: none;
-            background: black;
-            color: lime;
-            font-family: monospace;
-            font-size: 16px;
-            outline: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VinceAI</title>
+  <style>
+    body {
+      background-color: black;
+      color: green;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin-top: 10%;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid green;
+      border-radius: 5px;
+      background-color: black;
+      color: green;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: 1px solid green;
+      border-radius: 5px;
+      background-color: black;
+      color: green;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: green;
+      color: black;
+    }
+    .response {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-    <div id="console">
-        Welcome to VinceAI.<br>
-        Type a question to begin.<br>
-    </div>
-    <input type="text" id="command" placeholder="Type a command..." autofocus>
-    <script>
-        const consoleDiv = document.getElementById('console');
-        const commandInput = document.getElementById('command');
-
-        commandInput.addEventListener('keydown', async (e) => {
-            if (e.key === 'Enter') {
-                const question = commandInput.value.trim();
-                commandInput.value = '';
-                if (!question) {
-                    return;
-                }
-
-                consoleDiv.innerHTML += `> ${question}<br>`;
-                consoleDiv.scrollTop = consoleDiv.scrollHeight;
-
-                try {
-                    const response = await fetch('http://localhost:3000/ask', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ question }),
-                    });
-
-                    const data = await response.json();
-                    consoleDiv.innerHTML += `${data.answer}<br>`;
-                } catch (error) {
-                    consoleDiv.innerHTML += `Error: Unable to connect to the server.<br>`;
-                }
-
-                consoleDiv.scrollTop = consoleDiv.scrollHeight;
-            }
-        });
-    </script>
+  <div class="container">
+    <h1>Welcome to VinceAI</h1>
+    <p>Type a question to begin:</p>
+    <input type="text" id="question" placeholder="Type your question here">
+    <button onclick="askVinceAI()">Submit</button>
+    <div id="response" class="response"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
 
