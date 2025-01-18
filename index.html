@@ -4,89 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VinceAI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Roboto Mono', monospace;
             background-color: black;
-            color: #39ff14; /* Neon green */
+            color: #00FF00;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            border: 3px solid #00FF00;
+            box-sizing: border-box;
+        }
+
+        .header {
             text-align: center;
+            margin-top: 20px;
+        }
+
+        .content {
+            flex: 1;
             padding: 20px;
+            overflow-y: auto;
         }
 
-        h1 {
-            font-size: 3em;
-            text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-
-        input[type="text"] {
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
-            color: #39ff14;
-            border: 2px solid #39ff14;
-            border-radius: 5px;
+        .footer {
+            display: flex;
             padding: 10px;
-            font-size: 1.2em;
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
+            border-top: 2px solid #00FF00;
+        }
+
+        .footer input {
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            color: #00FF00;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 16px;
+            padding: 5px;
             outline: none;
-            box-shadow: 0 0 10px #39ff14;
         }
 
-        input[type="text"]:focus {
-            box-shadow: 0 0 20px #39ff14;
-        }
-
-        button {
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent black */
-            color: #39ff14;
-            border: 2px solid #39ff14;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            cursor: pointer;
-            box-shadow: 0 0 10px #39ff14;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #39ff14;
-            color: black;
-            box-shadow: 0 0 20px #39ff14;
-        }
-
-        #response {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #39ff14;
-            text-shadow: 0 0 10px #39ff14;
+        .footer input::placeholder {
+            color: #00FF00;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to VinceAI</h1>
-    <p>Type a question to begin:</p>
-    <input type="text" id="question" placeholder="Ask VinceAI a question...">
-    <br>
-    <button onclick="askVinceAI()">Execute</button>
-    <div id="response">This is where VinceAI's response will appear.</div>
+    <div class="header">
+        <h1>Welcome to VinceAI.</h1>
+        <p>Type a question to begin:</p>
+    </div>
+    <div class="content" id="output">
+        <!-- Chat content will go here dynamically -->
+    </div>
+    <div class="footer">
+        <input type="text" id="command" placeholder="Type a command...">
+    </div>
 
     <script>
-        function askVinceAI() {
-            const question = document.getElementById('question').value;
-            const responseDiv = document.getElementById('response');
+        const outputDiv = document.getElementById('output');
+        const commandInput = document.getElementById('command');
 
-            // Simulate a response for now
-            responseDiv.innerHTML = `You asked: "${question}"<br> VinceAI responds: "Processing your query..."`;
-        }
+        commandInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const userInput = commandInput.value;
+                if (userInput.trim() !== '') {
+                    outputDiv.innerHTML += `<p>> ${userInput}</p>`;
+                    outputDiv.innerHTML += `<p>Error: Unable to connect to the server.</p>`;
+                    commandInput.value = '';
+                    outputDiv.scrollTop = outputDiv.scrollHeight;
+                }
+            }
+        });
     </script>
 </body>
 </html>
